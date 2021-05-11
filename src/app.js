@@ -113,7 +113,7 @@ App = {
       App.setLoading(true)
       const content = $('#newTask').val()
       await App.todoList.createTask(content)
-      window.location.reload()
+      window.location.reload() //shortcut instead of listening to events and emitting, can reload the page once task is created
     },
   
     toggleCompleted: async (e) => {
