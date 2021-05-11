@@ -17,6 +17,11 @@ contract TodoList {
         bool completed
     );
 
+    event TaskCompleted(
+        uint id,
+        bool completed
+    );
+
     constructor() public {
         //called when the app is run for the first time to create a default task in the TodoList
         createTask("Check out dappuniversity.com");
@@ -28,4 +33,13 @@ contract TodoList {
         //solidity allows users to listen to events. trigger event by the follow
         emit TaskCreated(taskCount, _content, false);
     }
+
+    function toggleCompleted(uint _id) public {
+        Task memory _task = tasks[_id]; //declare variable w the type task in memory underscore means its a local variable, not a state variable
+        _task.completed = !_task.completed; //toggle completed value
+        tasks[_id] = _task; //put it back into the task mapping
+        emit TaskCompleted(_id, _task.completed);
+    }
+
+
 }
